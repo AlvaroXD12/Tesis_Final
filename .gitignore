@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+
+# Editor / entorno
+.claude/
+.vscode/
+.idea/
+
+# Modelos entrenados (grandes: se generan al entrenar, no se versionan)
+**/models/*.pt
+
+# Caches de HuggingFace / torch
+.cache/
+**/.cache/
+
+# Temporales
+*.tmp
+_*.py

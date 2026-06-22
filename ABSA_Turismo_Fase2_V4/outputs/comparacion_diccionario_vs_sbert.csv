@@ -1,0 +1,10 @@
+﻿aspecto,F1_dict,F1_sbert,P_dict,P_sbert,R_dict,R_sbert,soporte,gana
+atractivos,0.957,0.951,0.977,0.906,0.937,1.0,271,diccionario
+costos,0.842,0.612,0.762,0.487,0.941,0.824,68,diccionario
+seguridad,0.519,0.111,0.389,0.06,0.778,0.778,9,diccionario
+accesibilidad,0.893,0.469,0.888,0.312,0.898,0.943,88,diccionario
+limpieza,0.828,0.361,0.75,0.283,0.923,0.5,26,diccionario
+atencion_servicio,0.879,0.4,0.812,0.252,0.958,0.972,72,diccionario
+gastronomia,0.593,0.276,0.421,0.19,1.0,0.5,16,diccionario
+alojamiento,0.889,0.068,0.923,0.037,0.857,0.357,14,diccionario
+MACRO,0.8,0.406,0.74,0.316,0.912,0.734,564,diccionario

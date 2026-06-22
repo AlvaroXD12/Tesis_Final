@@ -1,0 +1,16 @@
+﻿destination_id,destination,region,tipo_experiencia,intereses,fuente_oficial,estado
+machu_picchu,Santuario Histórico de Machu Picchu,Cusco,arqueológico-cultural-natural,"cultura, naturaleza, aventura, académico",MINCETUR / DatosTurismo,mantener
+ollantaytambo,Sitio Arqueológico de Ollantaytambo,Cusco,arqueológico-cultural,"cultura, historia, aventura",MINCETUR / DatosTurismo,mantener
+saqsayhuaman,Parque Arqueológico de Sacsayhuamán,Cusco,arqueológico-cultural,"cultura, historia, fotografía",MINCETUR / DatosTurismo,mantener
+ciudadela_kuelap,Ciudadela de Kuélap,Amazonas,arqueológico-natural,"cultura, naturaleza, aventura",MINCETUR / DatosTurismo,mantener
+chan_chan,Complejo Arqueológico Chan Chan,La Libertad,arqueológico-cultural,"cultura, historia, académico",MINCETUR / DatosTurismo,mantener
+huaca_sol_luna,Huacas del Sol y de la Luna,La Libertad,arqueológico-cultural,"cultura, historia, académico",MINCETUR / DatosTurismo,mantener
+huaca_pucllana,Museo de Sitio Huaca Pucllana,Lima,arqueológico-urbano,"cultura, urbano, gastronomía",MINCETUR / DatosTurismo,mantener
+pachacamac,Santuario Arqueológico de Pachacámac,Lima,arqueológico-cultural,"cultura, historia, académico",MINCETUR / DatosTurismo,mantener
+parque_aguas,Circuito Mágico del Agua,Lima,urbano-recreativo,"urbano, familiar, relax",MINCETUR / DatosTurismo,mantener
+tumbas_sipan,Museo Tumbas Reales del Señor de Sipán,Lambayeque,cultural-museístico,"cultura, académico, familiar",MINCETUR / DatosTurismo,mantener
+lineas_nazca,Líneas y Geoglifos de Nasca y Palpa,Ica,arqueológico-cultural,"cultura, aventura, fotografía",MINCETUR / DatosTurismo,mantener
+reserva_paracas,Reserva Nacional de Paracas,Ica,natural-playa,"naturaleza, playa, aventura, relax",MINCETUR / DatosTurismo,mantener
+valle_colca,Valle del Colca,Arequipa,natural-rural,"naturaleza, rural, aventura, relax",MINCETUR / DatosTurismo,mantener
+parque_huascaran,Parque Nacional Huascarán,Áncash,natural-aventura,"naturaleza, aventura, montañismo",SERNANP / MINCETUR,mantener
+catarata_ahuashiyacu,Catarata de Ahuashiyacu,San Martín,natural-aventura,"naturaleza, aventura, relax",MINCETUR / DatosTurismo,mantener

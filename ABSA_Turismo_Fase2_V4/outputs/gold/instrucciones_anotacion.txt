@@ -1,0 +1,17 @@
+INSTRUCCIONES DE ANOTACION — Gold set multi-etiqueta (Fase 2)
+============================================================
+
+Por cada reseña, revisa el texto (columna text_clean) y para CADA uno de los 8 aspectos
+marca uno de estos valores en su columna:
+   ausente  = la reseña NO habla de ese aspecto
+   negativo = lo menciona de forma NEGATIVA
+   neutro   = lo menciona de forma NEUTRA / mixta / informativa
+   positivo = lo menciona de forma POSITIVA
+
+Aspectos: atractivos, costos, seguridad, accesibilidad, limpieza, atencion_servicio, gastronomia, alojamiento
+
+Reglas:
+ - La mayoria de aspectos quedaran en 'ausente' (ya vienen pre-llenados); solo cambia los que la resena toca.
+ - clima y aforo NO son aspectos aqui (son contexto en Fase 4).
+ - No cambies las columnas base (review_uid, text_clean, etc.).
+ - Anota de forma independiente; no copies de otro anotador.
