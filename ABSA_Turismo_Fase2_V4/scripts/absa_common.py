@@ -11,6 +11,7 @@ import torch, torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
+from tqdm.auto import tqdm
 
 # -------- Rutas --------
 BASE = Path(__file__).resolve().parent.parent
@@ -127,16 +128,16 @@ def train_one(seed, model_name, neg_boost, focal_gamma, train, val, test, epochs
     scaler = torch.amp.GradScaler("cuda", enabled=USE_AMP); best,bs,pat,hist = -1,None,0,[]
     for ep in range(1, epochs+1):
         model.train(); run=0.0; nbt=len(tl); cada=max(1, nbt//4)
-        for bi, b in enumerate(tl, 1):
+        pbar = tqdm(tl, desc=f"Época {ep}/{epochs} [Seed {seed}]", leave=False, unit="batch")
+        for bi, b in enumerate(pbar, 1):
             opt.zero_grad()
             with torch.autocast("cuda", enabled=USE_AMP):
                 loss = loss_fn(model(b["input_ids"].to(DEVICE), b["attention_mask"].to(DEVICE)), b["labels"].to(DEVICE))
             scaler.scale(loss).backward(); scaler.unscale_(opt); torch.nn.utils.clip_grad_norm_(model.parameters(),1.0)
             scaler.step(opt); scaler.update(); sch.step(); run += loss.item()
-            if bi % cada == 0 or bi == nbt:
-                print(f"      {short} seed {seed} ép {ep}/{epochs}: batch {bi}/{nbt} ({bi*100//nbt}%) loss={loss.item():.3f}", flush=True)
+            pbar.set_postfix({"loss": f"{loss.item():.3f}"})
         vp, vt, vloss = predict(model, vl, loss_fn); vf = metrics(vt, [I2L[i] for i in vp.argmax(1)])["f1_macro"]
-        print(f"  [{short}] seed {seed} | época {ep}/{epochs} | val_f1={vf:.3f} | loss={run/len(tl):.3f}", flush=True)
+        tqdm.write(f"  [{short}] seed {seed} | época {ep}/{epochs} | val_f1={vf:.3f} | loss={run/len(tl):.3f}")
         if record_history:
             tp_, tt_, _ = predict(model, tl); tf = metrics(tt_, [I2L[i] for i in tp_.argmax(1)])["f1_macro"]
             hist.append({"epoch": ep, "train_loss": run/len(tl), "val_loss": vloss, "train_f1_macro": tf, "val_f1_macro": vf})
@@ -170,8 +171,9 @@ def run_modelo(tag, train, val, test, neg_boost, focal_gamma):
     model_name = MODELOS[tag]
     print(f"\n===== Entrenando {tag.upper()} ({model_name}) — {len(SEEDS)} semillas | NEG_BOOST={neg_boost} FOCAL={focal_gamma} =====", flush=True)
     rows, probs, vprobs, tt0, vt0, hist0 = [], [], [], None, None, None
-    for k, sd in enumerate(SEEDS):
-        print(f"  [{tag}] semilla {sd} ({k+1}/{len(SEEDS)})", flush=True)
+    pbar_seeds = tqdm(SEEDS, desc=f"Progreso Semillas ({tag})", unit="semilla")
+    for k, sd in enumerate(pbar_seeds):
+        pbar_seeds.set_postfix({"seed_actual": sd})
         tp, tt, vp, vtv, h = train_one(sd, model_name, neg_boost, focal_gamma, train, val, test, record_history=(k==0), save_tag=f"{tag}_seed{sd}_{VER}")
         tt0, vt0 = tt, vtv; probs.append(tp); vprobs.append(vp)
         if k == 0: hist0 = h

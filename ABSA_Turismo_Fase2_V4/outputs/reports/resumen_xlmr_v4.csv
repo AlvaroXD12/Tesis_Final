@@ -1,0 +1,2 @@
+﻿modelo,ensemble_f1_macro,ensemble_accuracy,ensemble_f1_negativo,ensemble_recall_negativo,ensemble_f1_neutro,ensemble_recall_neutro,ensemble_f1_positivo,ensemble_recall_positivo,media_f1_macro,std_f1_macro,estable_std<=0.03
+xlmr,0.6737,0.713,0.5872,0.5079,0.6447,0.649,0.7894,0.8165,0.6406,0.0237,True
