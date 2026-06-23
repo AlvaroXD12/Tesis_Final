@@ -29,7 +29,7 @@ SEEDS = [42, 7, 123, 2024, 77]
 LABEL_SMOOTHING = 0.1
 USE_GRADIENT_CHECKPOINTING = True
 CALIBRAR_DECISION = True
-NEG_BOOST_GRID, FOCAL_GRID, SEARCH_EPOCHS = [1.2, 1.8], [2.0], 3
+NEG_BOOST_GRID, FOCAL_GRID, SEARCH_EPOCHS = [1.0, 1.2, 1.4], [2.0], 3  # re-sintonizado con 464 negativos (1.8 colapsaba)
 TH_MACRO, TH_NEG_F1, TH_NEG_REC, TH_NEU_F1 = 0.70, 0.60, 0.60, 0.60
 
 LABELS = ["negativo", "neutro", "positivo"]; L2I = {l: i for i, l in enumerate(LABELS)}; I2L = {i: l for l, i in L2I.items()}
