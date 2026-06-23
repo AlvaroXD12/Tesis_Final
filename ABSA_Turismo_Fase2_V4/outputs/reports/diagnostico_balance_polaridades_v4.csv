@@ -1,0 +1,10 @@
+﻿scope,aspecto,n_negativo,n_neutro,n_positivo,total,pct_neg,pct_neu,pct_pos,clase_minoritaria,soporte_min_clase,brecha_may_min,def_neg,def_neu,def_pos
+global,TODOS,295,695,1312,2302,12.81,30.19,56.99,negativo,295,1017,,,
+aspecto,accesibilidad,58,167,160,385,15.1,43.4,41.6,negativo,58,109,0,0,0
+aspecto,alojamiento,5,47,30,82,6.1,57.3,36.6,negativo,5,42,25,0,0
+aspecto,atencion_servicio,29,135,159,323,9.0,41.8,49.2,negativo,29,130,1,0,0
+aspecto,atractivos,62,121,736,919,6.7,13.2,80.1,negativo,62,674,0,0,0
+aspecto,costos,81,122,131,334,24.3,36.5,39.2,negativo,81,50,0,0,0
+aspecto,gastronomia,3,47,35,85,3.5,55.3,41.2,negativo,3,44,27,0,0
+aspecto,limpieza,32,38,46,116,27.6,32.8,39.7,negativo,32,14,0,0,0
+aspecto,seguridad,25,18,15,58,43.1,31.0,25.9,positivo,15,10,5,12,15

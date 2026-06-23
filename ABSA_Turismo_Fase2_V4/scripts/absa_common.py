@@ -186,8 +186,13 @@ def run_modelo(tag, train, val, test, neg_boost, focal_gamma):
                    "estable_std<=0.03": bool(det["f1_macro"].std()<=0.03)}]).to_csv(art(tag,"resumen"), index=False, encoding="utf-8-sig")
     ta = test.copy(); ta["pred"] = preds; fa=[]
     for asp, gg in ta.groupby("aspecto"):
-        _,_,f1,_ = precision_recall_fscore_support(gg["label"], gg["pred"], labels=LABELS, average="macro", zero_division=0)
-        fa.append({"aspecto":asp, "soporte":len(gg), "f1_macro":round(f1,4)})
+        # F1-macro SOLO sobre las clases realmente presentes en el gold de ese aspecto:
+        # promediar sobre las 3 clases penaliza con F1=0 a aspectos casi-monoclase (p.ej. atractivos
+        # es casi todo positivo) y subestima su desempeño real. Se añade f1_weighted como referencia.
+        present = [l for l in LABELS if l in set(gg["label"])]
+        _,_,f1m,_ = precision_recall_fscore_support(gg["label"], gg["pred"], labels=present, average="macro", zero_division=0)
+        _,_,f1w,_ = precision_recall_fscore_support(gg["label"], gg["pred"], labels=LABELS, average="weighted", zero_division=0)
+        fa.append({"aspecto":asp, "soporte":len(gg), "n_clases":len(present), "f1_macro":round(f1m,4), "f1_weighted":round(f1w,4)})
     pd.DataFrame(fa).sort_values("f1_macro").to_csv(art(tag,"aspecto"), index=False, encoding="utf-8-sig")
     print(f"  [{tag}] LISTO. ensemble F1-macro={em['f1_macro']:.4f} (std {det['f1_macro'].std():.4f})", flush=True)
     return em
