@@ -109,13 +109,26 @@ def predict(model, loader, loss_fn=None):
 
 def apply_bias(probs, bias): return [I2L[i] for i in (np.log(probs+1e-9)+bias).argmax(1)]
 def best_bias(vp, vt):
+    """Calibracion de decision: elige el sesgo por clase que maximiza F1-macro en
+    validacion, SUJETO a recall del negativo >= TH_NEG_REC (mínimo de la spec).
+    Antes maximizaba el macro libre y sobreajustaba el val pequeño tirando el
+    recall-neg en test. Si ningun sesgo cumple la restriccion, cae a un objetivo
+    penalizado que no sacrifica el negativo a cambio de macro."""
     if not CALIBRAR_DECISION: return np.zeros(3)
-    logp=np.log(vp+1e-9); g=np.arange(-1.2,1.21,0.2); best,bb=-1,np.zeros(3)
+    logp = np.log(vp + 1e-9); g = np.arange(-1.2, 1.21, 0.15)
+    best_feas, bb_feas = -1.0, None            # sesgos que cumplen recall_neg >= TH
+    best_pen, bb_pen = -1e9, np.zeros(3)        # fallback penalizado
     for b0 in g:
         for b1 in g:
-            b=np.array([b0,b1,0.0]); f=metrics(vt,[I2L[i] for i in (logp+b).argmax(1)])["f1_macro"]
-            if f>best: best,bb=f,b
-    return bb
+            b = np.array([b0, b1, 0.0])
+            m = metrics(vt, [I2L[i] for i in (logp + b).argmax(1)])
+            macro, rneg = m["f1_macro"], m["recall_negativo"]
+            if rneg >= TH_NEG_REC and macro > best_feas:
+                best_feas, bb_feas = macro, b
+            pen = macro - 0.5 * max(0.0, TH_NEG_REC - rneg)
+            if pen > best_pen:
+                best_pen, bb_pen = pen, b
+    return bb_feas if bb_feas is not None else bb_pen
 
 def train_one(seed, model_name, neg_boost, focal_gamma, train, val, test, epochs=EPOCHS, record_history=False, save_tag=None):
     set_seed(seed); tok = AutoTokenizer.from_pretrained(model_name); short = model_name.split("-")[0]
