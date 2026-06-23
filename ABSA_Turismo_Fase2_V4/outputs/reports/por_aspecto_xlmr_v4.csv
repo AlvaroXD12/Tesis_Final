@@ -1,9 +1,9 @@
 ﻿aspecto,soporte,n_clases,f1_macro,f1_weighted
-gastronomia,16,3,0.4152,0.579
-accesibilidad,72,3,0.5238,0.5941
-alojamiento,8,2,0.5636,0.6045
-atencion_servicio,59,3,0.5669,0.5874
-atractivos,180,3,0.64,0.8093
-costos,58,3,0.6482,0.6459
-seguridad,15,3,0.7472,0.7358
-limpieza,24,3,0.788,0.793
+gastronomia,16,3,0.2963,0.4028
+accesibilidad,72,3,0.5363,0.5772
+alojamiento,8,2,0.6136,0.642
+atencion_servicio,59,3,0.6297,0.6426
+seguridad,15,3,0.6615,0.7224
+atractivos,180,3,0.6618,0.8095
+costos,58,3,0.6761,0.6748
+limpieza,24,3,0.7852,0.7889
