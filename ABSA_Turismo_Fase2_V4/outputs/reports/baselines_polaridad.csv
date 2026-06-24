@@ -1,4 +1,4 @@
 ﻿modelo,f1_macro
-Mayoría,0.2236
-TF-IDF + LogReg,0.5435
-TF-IDF + SVM,0.5412
+Mayoría,0.2131
+TF-IDF + LogReg,0.5314
+TF-IDF + SVM,0.525
